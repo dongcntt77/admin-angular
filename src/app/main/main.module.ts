@@ -6,7 +6,6 @@ import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { MainComponent } from './main.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { SharedModule } from '../shared/shared.module';
 export const mainRoutes: Routes = [
   {
       path: '', component: MainComponent,
@@ -23,7 +22,6 @@ export const mainRoutes: Routes = [
       ]
   }
 ];
-
 @NgModule({
   declarations: [
     SidebarComponent,
@@ -33,7 +31,6 @@ export const mainRoutes: Routes = [
   ],
   imports: [
     CommonModule,
-    SharedModule,
     RouterModule.forChild(mainRoutes)
   ]
 })

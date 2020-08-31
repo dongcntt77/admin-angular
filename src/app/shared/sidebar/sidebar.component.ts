@@ -6,7 +6,7 @@ declare let $: any;
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
-  menus = [
+  public menus = [
   {name :'Người dùng', url:'',icon:'user',childs:[{name:'Quản lý người dùng',url:'user/user'},{name:'Đăng xuất', url:''},{name:'Đăng nhập', url:'/login'}]},
   {name:'Hàng hóa',url:'',icon:'signal',childs:[{name:'Quản lý đơn hàng',url:'/product/order'},{name:'Quản lý loại hàng',url:'/product/type'},{name:'Quản lý sản phẩm',url:'/product/product'}]}];
   constructor() { } 
@@ -26,7 +26,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       }, 100);
       if (!$('#sidebar').hasClass('menu-min')) {
         $('.main-content').css('padding-left', '43px');
-        //$('#breadcrumbs').css('left', '43px');
         $('.footer-inner').css('left', '43px');
       } else {
         $('.main-content').css('padding-left', '190px');

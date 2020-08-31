@@ -1,19 +1,51 @@
 <div class="breadcrumbs" id="breadcrumbs">
-    <ul class="breadcrumb">
-      <li>
-        <i class="ace-icon fa fa-home home-icon"></i>
-        <a href="#">Trang chủ</a>
-      </li>
-      <li class="active">Quản lý người dùng</li>
-    </ul><!-- /.breadcrumb -->
+  <ul class="breadcrumb">
+    <li>
+      <i class="ace-icon fa fa-home home-icon"></i>
+      <a href="#">Trang chủ</a>
+    </li>
+    <li class="active">Quản lý người dùng</li>
+  </ul>
+  <!-- /.breadcrumb -->
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <!-- PAGE CONTENT BEGINS -->
+    <p-panel header="Header">
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Text Field </label>
+          <div class="col-sm-11">
+            <input type="text" id="form-field-1" placeholder="Username" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Text Field </label>
+          <div class="col-sm-8">
+            <input type="text" id="form-field-1" placeholder="Username" style="width: 100%;" />
+          </div>
+          <div class="col-sm-3">
+            <input type="text" id="form-field-1" placeholder="Username" />
+          </div>
+        </div>
+      </form> 
+    </p-panel>
+    <p-table [value]="cars" styleClass="p-datatable-gridlines">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Vin</th>
+          <th>DT</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-car>
+        <tr>
+          <td>{{ car.name }}</td>
+          <td>{{ car.dt }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <!-- PAGE CONTENT ENDS -->
   </div>
-  <div class="page-content"> 
-    <div class="row">
-      <div class="col-xs-12">
-        <!-- PAGE CONTENT BEGINS -->
-                   Nội dung trang quản lý người dùng
-                   <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
-        <!-- PAGE CONTENT ENDS -->
-      </div><!-- /.col -->
-    </div><!-- /.row -->
-  </div><!-- /.page-content -->
+  <!-- /.col -->
+</div>
+<!-- /.row -->

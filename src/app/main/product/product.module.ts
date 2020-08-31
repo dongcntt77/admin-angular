@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { OrderComponent } from './order/order.component';
 import { ProductComponent } from './product/product.component';
 import { TypeComponent } from './type/type.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [ 
@@ -11,6 +12,7 @@ import { TypeComponent } from './type/type.component';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: 'order',
