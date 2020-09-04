@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  cars = [{name:'a1',dt:8.5},{name:'a2',dt:9.3}];
+  nguoidungs = [
+    {taikhoa:'dongnh',hoten:'Nguyễn Hữu Đông',mota:'Quản trị dự án',trangthai:''},
+    {taikhoa:'duongtran',hoten:'N	Trần Đỗ Hồng Dương',mota:'Thành viên',trangthai:''}
+  
+  ];
   constructor() { }
 
   ngOnInit(): void {

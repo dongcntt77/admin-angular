@@ -33,17 +33,34 @@
         </div>
       </form> 
     </p-panel>
-    <p-table [value]="cars" styleClass="p-datatable-gridlines">
+    <p-table selectionMode="single" [value]="nguoidungs" styleClass="p-datatable-gridlines">
       <ng-template pTemplate="header">
         <tr>
-          <th>Vin</th>
-          <th>DT</th>
+          <th style="width: 70px; text-align: center;">STT</th>
+          <th style="width: 15%; text-align: left;">Tài khoản</th>
+          <th style="width: 20%; text-align: left;">Họ tên</th>
+          <th style="text-align: left;">Mô tả</th>
+          <th style="width: 130px; text-align: left;">Trạng thái</th>
+          <th style="width: 200px; text-align: left;">Tác vụ</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-car>
+      <ng-template pTemplate="body" let-item  let-i="rowIndex">
         <tr>
-          <td>{{ car.name }}</td>
-          <td>{{ car.dt }}</td>
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.taikhoa }}</td>
+          <td>{{ item.hoten }}</td>
+          <td>{{ item.mota }}</td>
+          <td>{{ item.trangthai }}</td>
+          <td class="action-col" >
+            <div class="btn-group">
+              <button title="" class="btn btn-xs btn-white btn-default">  
+                <i class="ace-icon fa fa-edit"></i>
+              </button>
+              <button title="" class="btn btn-xs btn-white btn-default">
+                <i class="ace-icon fa fa-adjust"></i>
+              </button>
+            </div>  
+          </td>
         </tr>
       </ng-template>
     </p-table>

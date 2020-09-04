@@ -10,3 +10,18 @@
 .p-datatable .p-datatable-thead > tr > td { 
     padding: 0.8rem 1rem !important
 }
+.btn-group, .btn-group-vertical {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+.action-col .btn {
+    background-color: transparent !important;
+    padding: 5px 10px 0 10px;
+    border-width: 0;
+    border-right-width: 1px;
+  }
+.action-col button>i {
+    color: #6FB3E0;
+  }
+  
