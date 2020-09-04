@@ -1,0 +1,12 @@
+.p-component  { 
+    font-size: 1.4rem !important;
+}
+.form-group  { 
+    margin-bottom: 8px !important;
+}
+.p-datatable .p-datatable-thead > tr > th { 
+    padding: 0.8rem 1rem !important
+}
+.p-datatable .p-datatable-thead > tr > td { 
+    padding: 0.8rem 1rem !important
+}
