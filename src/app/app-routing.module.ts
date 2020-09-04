@@ -13,9 +13,8 @@ const routes: Routes = [
     loadChildren: () => import('./main/main.module').then((m) => m.MainModule),
   },
 ];
-
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{preloadingStrategy: PreloadAllModules} )],
+  imports: [RouterModule.forRoot(routes,{preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
