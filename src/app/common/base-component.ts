@@ -2,8 +2,8 @@ import { of as observableOf, fromEvent } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FileUpload } from 'primeng/fileupload';
 export class BaseComponent {
-   protected genders: any;
-   protected locale_vn:any;
+   public genders: any;
+   public locale_vn:any;
    constructor() { 
           this.genders =  [
             {label:'Nam',value:'Nam'},
