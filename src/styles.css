@@ -24,4 +24,22 @@
 .action-col button>i {
     color: #6FB3E0;
   }
-  
+.no-margin {
+    margin: 0!important;
+}
+.nav-search { 
+    right: 10px !important;
+}
+.utehy-form {
+    padding-top: 8px;
+}
+.form-horizontal .form-group {
+    margin-left: 0 !important; 
+    margin-right: 0 !important;
+}
+input { 
+    width: 100%;
+}
+.p-inputtext {
+    font-size: 1.4rem !important;
+}

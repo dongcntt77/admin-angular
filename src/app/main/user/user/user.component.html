@@ -6,12 +6,18 @@
     </li>
     <li class="active">Quản lý người dùng</li>
   </ul>
-  <!-- /.breadcrumb -->
+  <div class="nav-search">
+    <p class="pull-right no-margin">
+      <a (click)="createModal()" class="btn btn-success btn-xs">
+        <i class="fa fa-plus"></i>&nbsp;&nbsp; Thêm
+      </a>
+    </p>
+  </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
     <!-- PAGE CONTENT BEGINS -->
-    <p-panel header="Tìm kiếm">
+    <p-panel header="Tìm kiếm" [style]="{'margin-top': '2px'}">
       <form class="form-horizontal" role="form">
         <div class="form-group">
           <label class="col-sm-1 control-label no-padding-right"> Tài khoản </label>
@@ -69,3 +75,66 @@
   <!-- /.col -->
 </div>
 <!-- /.row -->
+<div  id="createUserModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg full-height-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">ccc</h4>
+        </div>
+        <div class="modal-body no-padding">
+          <form [formGroup]="formdata"  class="form-horizontal utehy-form">
+            <div class="form-group">
+              <label class="col-sm-1 control-label no-padding-right"> Họ tên </label>
+              <div class="col-sm-7">
+                <input type="text" placeholder="Họ tên" formControlName="hoten" />
+              </div>
+              <label class="col-sm-1 control-label no-padding-right"> Ngày sinh </label>
+              <div class="col-sm-3">
+                <p-calendar formControlName="ngaysinh" [locale]="locale_vn" formControlName="hoten" [(ngModel)]="datetime" [showIcon]="true" inputId="icon"></p-calendar>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-1 control-label no-padding-right"> Địa chỉ</label>
+              <div class="col-sm-7">
+                <input type="text" formControlName="diachi" placeholder="Địa chỉ" />
+              </div>
+              <label class="col-sm-1 control-label no-padding-right"> Giới tính</label>
+              <div class="col-sm-3">
+                <p-dropdown [options]="genders" formControlName="gioitinh"  [(ngModel)]="selectedGT" [style]="{'width':'100%'}"></p-dropdown>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-1 control-label no-padding-right"> Email</label>
+              <div class="col-sm-11">
+                <input type="email" formControlName="email" placeholder="email" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-1 control-label no-padding-right"> Ảnh đại diện</label>
+              <div class="col-sm-11">
+                <p-fileUpload #file_image mode="advanced" [showUploadButton]="false" cancelLabel="Hủy" chooseLabel ="Chọn ảnh"   multiple="false" accept="image/*" maxFileSize="1000000">
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                        </ul>
+                    </ng-template>
+              </p-fileUpload>
+              </div>
+            </div>
+          </form> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-sm">
+            <i class="fa fa-bell"></i> Làm mới
+          </button>
+          <button type="button" (click)="onSubmit()" class="btn btn-success btn-sm btn-submit">
+            <i class="fa fa-save"></i> Đồng ý
+          </button>
+          <button type="button" class="btn btn-default btn-sm" (click)="closeModal()">
+            <i class="fa fa-times"></i> Đóng lại
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
