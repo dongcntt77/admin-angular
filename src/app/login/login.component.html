@@ -6,13 +6,9 @@
                 <div class="ui-form-group">
                     <input type="text" formControlName="username" placeholder="Tên tài khoản">
                 </div>
-                <!-- <div *ngIf="f.password.errors && f.username.touched" class="col alert alert-danger" role="alert">
-                    <div *ngIf="f.username.errors.required">Tài khoản không được rỗng!</div>
-                </div> -->
-
                 <div class="col alert alert-danger" role="alert"
                 *ngIf="loginForm.controls.username?.errors?.required
-                        && loginForm.controls.username?.touched">
+                && loginForm.controls.username?.touched" >
                         Tài khoản không được để rỗng!
                 </div>
                 <div class="ui-form-group">
@@ -20,7 +16,8 @@
                 </div>
                  
                 <div class="col alert alert-danger" role="alert"
-                *ngIf="loginForm.controls.password.hasError('minlength') && !loginForm.controls.password.hasError('required')">
+                *ngIf="!loginForm.controls.password?.errors?.required
+                && loginForm.controls.password?.touched && loginForm.controls.password?.errors?.minlength">
                         Mật khẩu không được để rỗng và độ dài mật khẩu phải lớn hơn 6 ký tự!
                 </div> 
                 <div class="checkbox">
@@ -29,7 +26,7 @@
                         <span class="lbl">Ghi nhớ</span>
                     </label>
                 </div>
-                <button [disabled]="" type="submit">Đăng nhập</button>
+                <button [disabled]="loginForm.invalid" type="submit">Đăng nhập</button>
             </form> 
         </div>
     </div>
