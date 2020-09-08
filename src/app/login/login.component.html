@@ -6,9 +6,23 @@
                 <div class="ui-form-group">
                     <input type="text" formControlName="username" placeholder="Tên tài khoản">
                 </div>
+                <!-- <div *ngIf="f.password.errors && f.username.touched" class="col alert alert-danger" role="alert">
+                    <div *ngIf="f.username.errors.required">Tài khoản không được rỗng!</div>
+                </div> -->
+
+                <div class="col alert alert-danger" role="alert"
+                *ngIf="loginForm.controls.username?.errors?.required
+                        && loginForm.controls.username?.touched">
+                        Tài khoản không được để rỗng!
+                </div>
                 <div class="ui-form-group">
                     <input type="password" formControlName="password" placeholder="Mật khẩu">
                 </div>
+                 
+                <div class="col alert alert-danger" role="alert"
+                *ngIf="loginForm.controls.password.hasError('minlength') && !loginForm.controls.password.hasError('required')">
+                        Mật khẩu không được để rỗng và độ dài mật khẩu phải lớn hơn 6 ký tự!
+                </div> 
                 <div class="checkbox">
                     <label>
                         <input formControlName="remember" type="checkbox" class="ace">
