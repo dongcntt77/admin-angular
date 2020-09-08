@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
     });
   }
   onSubmit(value: any) {
+    let xx =  value;
+    debugger;
     this.router.navigate(['']);
   }
 }

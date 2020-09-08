@@ -4,10 +4,10 @@
             <h1>Đăng nhập</h1>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
                 <div class="ui-form-group">
-                    <input type="text" placeholder="Tên tài khoản">
+                    <input type="text" formControlName="username" placeholder="Tên tài khoản">
                 </div>
                 <div class="ui-form-group">
-                    <input type="password" formControlName="password" ngModel placeholder="Mật khẩu">
+                    <input type="password" formControlName="password" placeholder="Mật khẩu">
                 </div>
                 <div class="checkbox">
                     <label>
