@@ -4,7 +4,11 @@ import { FileUpload } from 'primeng/fileupload';
 export class BaseComponent {
    public genders: any;
    public locale_vn:any;
+   public today: any;
+   public dateFormat: any;
    constructor() { 
+          this.today = new Date();
+          this.dateFormat = "dd/mm/yy";
           this.genders =  [
             {label:'Nam',value:'Nam'},
             {label:'Nữ',value:'Nữ'},

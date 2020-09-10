@@ -43,3 +43,9 @@ input {
 .p-inputtext {
     font-size: 1.4rem !important;
 }
+.invalid-feedback {
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}

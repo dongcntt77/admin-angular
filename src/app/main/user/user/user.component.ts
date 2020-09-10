@@ -1,7 +1,8 @@
-import { BaseComponent } from './../../../common/base-component';
+import { MustMatch } from '../../../helpers/must-match.validator';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FileUpload } from 'primeng/fileupload';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators} from '@angular/forms';
+import { BaseComponent } from '../../../common/base-component';
 declare var $: any;
 @Component({
   selector: 'app-user',
@@ -10,12 +11,9 @@ declare var $: any;
 })
 export class UserComponent extends BaseComponent implements OnInit {
   public nguoidungs: any;
-  public datetime: Date;
-  public selectedGT: any;
-  public mota: any;
   public uploadedFiles: any[] = [];
-  public formdata:any;
-  public form
+  public formdata: any;
+  submitted = false;
   @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
   constructor(private fb: FormBuilder) {
     super();
@@ -23,13 +21,18 @@ export class UserComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.formdata = this.fb.group({
-      hoten: this.fb.control(''),
-      ngaysinh: this.fb.control(''),
-      diachi: this.fb.control(''),
-      gioitinh: this.fb.control(''),
-      email: this.fb.control('') 
+      hoten: ['', Validators.required],
+      ngaysinh: [this.today, Validators.required],
+      diachi: [''],
+      gioitinh: ['', Validators.required],
+      email: ['', [Validators.required,Validators.email]],
+      taikhoan: ['', Validators.required],
+      matkhau: ['', [this.pwdCheckValidator]],
+      nhaplaimatkhau: ['', Validators.required],
+    }, {
+      validator: MustMatch('matkhau', 'nhaplaimatkhau')
     });
-  
+
     this.nguoidungs = [
       {
         taikhoa: 'dongnh',
@@ -45,7 +48,26 @@ export class UserComponent extends BaseComponent implements OnInit {
       },
     ];
   }
-  onSubmit() {}
+
+  pwdCheckValidator(control){
+    var filteredStrings = {search:control.value, select:'@#!$%&*'}
+    var result = (filteredStrings.select.match(new RegExp('[' + filteredStrings.search + ']', 'g')) || []).join('');
+    if(control.value.length < 6 || !result){
+        return {matkhau: true};
+    }
+  }
+
+  get f() { return this.formdata.controls; }
+
+  onSubmit(value) {
+    this.submitted = true;
+    let xx = value;
+    debugger;
+    this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
+      let data_image = data == '' ? null : data;
+      //this.closeModal();
+    });
+  }
 
   createModal() {
     setTimeout(() => {

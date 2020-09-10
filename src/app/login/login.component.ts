@@ -25,9 +25,7 @@ export class LoginComponent implements OnInit {
     let xx = value;
     debugger;
     // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
-    }
+   
     this.router.navigate(['']);
   }
 }
