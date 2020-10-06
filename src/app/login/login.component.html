@@ -2,24 +2,19 @@
     <div class="page-login-box">
         <div class="page-login-widget animated fadeInRight">
             <h1>Đăng nhập</h1>
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="ui-form-group">
                     <input type="text" formControlName="username" placeholder="Tên tài khoản">
                 </div>
-                <div class="col alert alert-danger" role="alert"
-                *ngIf="loginForm.controls.username?.errors?.required
-                && loginForm.controls.username?.touched" >
-                        Tài khoản không được để rỗng!
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Chưa nhập tài khoản!</div>
                 </div>
                 <div class="ui-form-group">
                     <input type="password" formControlName="password" placeholder="Mật khẩu">
                 </div>
-                 
-                <div class="col alert alert-danger" role="alert"
-                *ngIf="!loginForm.controls.password?.errors?.required
-                && loginForm.controls.password?.touched && loginForm.controls.password?.errors?.minlength">
-                        Mật khẩu không được để rỗng và độ dài mật khẩu phải lớn hơn 6 ký tự!
-                </div> 
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Chưa nhập mật khẩu!</div>
+                </div>
                 <div class="checkbox">
                     <label>
                         <input formControlName="remember" type="checkbox" class="ace">

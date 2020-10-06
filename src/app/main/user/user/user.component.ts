@@ -1,8 +1,9 @@
 import { MustMatch } from '../../../helpers/must-match.validator';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { FileUpload } from 'primeng/fileupload';
 import { FormBuilder, Validators} from '@angular/forms';
-import { BaseComponent } from '../../../common/base-component';
+import { BaseComponent } from '../../../lib/base-component';
+import 'rxjs/add/operator/takeUntil';
 declare var $: any;
 @Component({
   selector: 'app-user',
@@ -15,38 +16,26 @@ export class UserComponent extends BaseComponent implements OnInit {
   public formdata: any;
   submitted = false;
   @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
-  constructor(private fb: FormBuilder) {
-    super();
+  constructor(private fb: FormBuilder, injector: Injector) {
+    super(injector);
   }
 
   ngOnInit(): void {
     this.formdata = this.fb.group({
-      hoten: ['', Validators.required],
-      ngaysinh: [this.today, Validators.required],
-      diachi: [''],
-      gioitinh: ['', Validators.required],
-      email: ['', [Validators.required,Validators.email]],
-      taikhoan: ['', Validators.required],
-      matkhau: ['', [this.pwdCheckValidator]],
-      nhaplaimatkhau: ['', Validators.required],
+      'hoten': ['', Validators.required],
+      'ngaysinh': ['', Validators.required],
+      'diachi': [''],
+      'gioitinh': ['', Validators.required],
+      'email': ['', [Validators.required,Validators.email]],
+      'taikhoan': ['', Validators.required],
+      'matkhau': ['', [this.pwdCheckValidator]],
+      'nhaplaimatkhau': ['', Validators.required],
     }, {
       validator: MustMatch('matkhau', 'nhaplaimatkhau')
     });
-
-    this.nguoidungs = [
-      {
-        taikhoa: 'dongnh',
-        hoten: 'Nguyễn Hữu Đông',
-        mota: 'Quản trị dự án',
-        trangthai: '',
-      },
-      {
-        taikhoa: 'duongtran',
-        hoten: 'Trần Đỗ Hồng Dương',
-        mota: 'Thành viên',
-        trangthai: '',
-      },
-    ];
+    this._api.get('/users').takeUntil(this.unsubscribe).subscribe(res => {
+      this.nguoidungs = res;
+      });
   }
 
   pwdCheckValidator(control){
@@ -61,17 +50,33 @@ export class UserComponent extends BaseComponent implements OnInit {
 
   onSubmit(value) {
     this.submitted = true;
-    let xx = value;
-    debugger;
     this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
       let data_image = data == '' ? null : data;
-      //this.closeModal();
     });
+  }
+   
+  Reset1() { 
+    setTimeout(() => {
+      this.submitted  =  false;
+      this.formdata.reset();
+      this.formdata.clearValidators();
+      this.formdata.updateValueAndValidity();
+   });
+  }
+
+  Reset() {  
+      this.formdata.get('ngaysinh').setValue(this.today);
+      this.formdata.get('gioitinh').setValue(this.genders[0]); 
   }
 
   createModal() {
     setTimeout(() => {
       $('#createUserModal').modal('toggle');
+      this.Reset1(); 
+       setTimeout(() => {
+        this.formdata.get('ngaysinh').setValue(this.today);
+        this.formdata.get('gioitinh').setValue(this.genders[0]); 
+      });
     });
   }
   closeModal() {

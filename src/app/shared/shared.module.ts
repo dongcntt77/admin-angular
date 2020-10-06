@@ -7,8 +7,10 @@ import {CalendarModule} from 'primeng/calendar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {DropdownModule} from 'primeng/dropdown';
 import {FileUploadModule} from 'primeng/fileupload';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { FileNotFoundComponent } from './file-not-found/file-not-found.component';
 @NgModule({
-  declarations: [],
+  declarations: [UnauthorizedComponent, FileNotFoundComponent],
   imports: [
     FormsModule,
     PanelModule,

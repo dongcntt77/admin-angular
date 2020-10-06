@@ -1,12 +1,18 @@
-import { of as observableOf, fromEvent } from 'rxjs';
+import { of as observableOf, fromEvent, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FileUpload } from 'primeng/fileupload';
+import { ApiService } from '../lib/api.service';
+import { ActivatedRoute } from '@angular/router';
+import { Injector } from '@angular/core';
 export class BaseComponent {
    public genders: any;
    public locale_vn:any;
    public today: any;
    public dateFormat: any;
-   constructor() { 
+   public unsubscribe = new Subject();
+   public _api: ApiService;
+   public _route: ActivatedRoute;
+   constructor(injector: Injector) { 
           this.today = new Date();
           this.dateFormat = "dd/mm/yy";
           this.genders =  [
@@ -74,6 +80,8 @@ export class BaseComponent {
             "today": "Hôm nay",
             "clear": "Xóa"
           };
+          this._api = injector.get(ApiService);
+          this._route = injector.get(ActivatedRoute);
       }
    public getEncodeFromImage(fileUpload: FileUpload) {
         if (fileUpload) {

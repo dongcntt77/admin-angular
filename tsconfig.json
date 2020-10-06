@@ -1,17 +1,39 @@
+// {
+//   "compileOnSave": true,
+//   "compilerOptions": {
+//     "baseUrl": "./",
+//     "outDir": "./dist/out-tsc",
+//     "sourceMap": true,
+//     "declaration": false,
+//     "module": "esnext",
+//     "moduleResolution": "node",
+//     "emitDecoratorMetadata": true,
+//     "experimentalDecorators": true,
+//     "target": "es5",
+//     "typeRoots": ["node_modules/@types"],
+//     "lib": ["es2018", "dom"]
+//   },
+//   "exclude": ["node_modules/@types"]
+// }
 {
-  "compileOnSave": true,
+  "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es5",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["es2018", "dom"]
-  },
-  "exclude": ["node_modules/@types"]
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  }
 }
