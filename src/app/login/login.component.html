@@ -21,7 +21,8 @@
                         <span class="lbl">Ghi nhớ</span>
                     </label>
                 </div>
-                <button [disabled]="loginForm.invalid" type="submit">Đăng nhập</button>
+                <button [disabled]="loginForm.invalid || loading" type="submit">
+                    Đăng nhập</button>
             </form> 
         </div>
     </div>
