@@ -33,7 +33,7 @@ export class UserComponent extends BaseComponent implements OnInit {
     }, {
       validator: MustMatch('matkhau', 'nhaplaimatkhau')
     });
-    this._api.get('/users').takeUntil(this.unsubscribe).subscribe(res => {
+    this._api.get('/api/users/get-all').takeUntil(this.unsubscribe).subscribe(res => {
       this.nguoidungs = res;
       });
   }
@@ -52,17 +52,11 @@ export class UserComponent extends BaseComponent implements OnInit {
     this.submitted = true;
     this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
       let data_image = data == '' ? null : data;
+      this._api.post('/api/users/create-user',{image_url:data_image, hoten:value.hoten}).takeUntil(this.unsubscribe).subscribe(res => {
+        debugger;
+        });
     });
-  }
-   
-  Reset1() { 
-    setTimeout(() => {
-      this.submitted  =  false;
-      this.formdata.reset();
-      this.formdata.clearValidators();
-      this.formdata.updateValueAndValidity();
-   });
-  }
+  } 
 
   Reset() {  
       this.formdata.get('ngaysinh').setValue(this.today);
@@ -72,7 +66,6 @@ export class UserComponent extends BaseComponent implements OnInit {
   createModal() {
     setTimeout(() => {
       $('#createUserModal').modal('toggle');
-      this.Reset1(); 
        setTimeout(() => {
         this.formdata.get('ngaysinh').setValue(this.today);
         this.formdata.get('gioitinh').setValue(this.genders[0]); 

@@ -15,12 +15,19 @@ export class JwtInterceptor implements HttpInterceptor {
         const isApiUrl = request.url.startsWith(environment.apiUrl);
         if (isLoggedIn && isApiUrl) {
             request = request.clone({
+                // setHeaders: {
+                //     Authorization: `Bearer ${user.token}`
+                // }
                 setHeaders: {
-                    Authorization: `Bearer ${user.token}`
-                }
+                    'Content-Type' : 'application/json; charset=utf-8',
+                    'Accept'       : 'application/json',
+                    'Authorization': `Bearer ${user.token}`
+                  }
             });
         }
 
         return next.handle(request);
     }
+
+     
 }
