@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Injector } from '@angular/core';
 export class BaseComponent {
    public genders: any;
+   public roles: any;
    public locale_vn:any;
    public today: any;
    public dateFormat: any;
@@ -19,6 +20,10 @@ export class BaseComponent {
             {label:'Nam',value:'Nam'},
             {label:'Nữ',value:'Nữ'},
             {label:'Khác',value:'Khác'}
+          ];   
+          this.roles =  [
+            {label:'Admin',value:'Admin'},
+            {label:'User',value:'User'}
           ];   
           this.locale_vn={
             "firstDayOfWeek": 1,

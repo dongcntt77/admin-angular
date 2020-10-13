@@ -19,52 +19,52 @@
   <div class="col-xs-12">
     <!-- PAGE CONTENT BEGINS -->
     <p-panel header="Tìm kiếm" [style]="{'margin-top': '2px'}">
-      <form class="form-horizontal" role="form">
+      <form class="form-horizontal" role="form" [formGroup]="formsearch"  (ngSubmit)="search()">
         <div class="form-group">
           <label class="col-sm-1 control-label no-padding-right"> Tài khoản </label>
           <div class="col-sm-11">
-            <input type="text" placeholder="Tài khoản" />
+            <input formControlName="taikhoan"  type="text" placeholder="Tài khoản" />
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-1 control-label no-padding-right"> Họ tên</label>
           <div class="col-sm-11">
-            <input type="text" placeholder="Họ tên" style="width: 100%;" />
+            <input formControlName="hoten"  type="text" placeholder="Họ tên" style="width: 100%;" />
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-1 control-label no-padding-right"></label>
           <div class="col-sm-11">
-            <button class="btn btn-sm btn-primary">Tìm kiếm</button>
+            <button (click)="search()" class="btn btn-sm btn-primary">Tìm kiếm</button>
           </div>
         </div>
       </form> 
     </p-panel>
-    <p-table selectionMode="single" [value]="nguoidungs" styleClass="p-datatable-gridlines">
+    <p-table selectionMode="single" [value]="users" styleClass="p-datatable-gridlines">
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 70px; text-align: center;">STT</th>
           <th style="width: 15%; text-align: left;">Tài khoản</th>
           <th style="width: 20%; text-align: left;">Họ tên</th>
-          <th style="text-align: left;">Mô tả</th>
-          <th style="width: 130px; text-align: left;">Trạng thái</th>
-          <th style="width: 200px; text-align: left;">Tác vụ</th>
+          <th style="text-align: left;">Địa chỉ</th>
+          <th style="width: 130px; text-align: left;">Loại quyền</th>
+          <th style="width: 120px; text-align: left;">Tác vụ</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item  let-i="rowIndex">
         <tr>
           <td style="width: 70px; text-align: center;">{{ i + 1 }}</td>
-          <td>{{ item.taikhoa }}</td>
-          <td>{{ item.lastName }}</td>
-          <td>{{ item.mota }}</td>
-          <td>{{ item.trangthai }}</td>
+          <td>{{ item.taikhoan }}</td>
+          <td>{{ item.hoten }}</td>
+          <td>{{ item.diachi }}</td>
+          <td>{{ item.role }}</td>
           <td class="action-col" >
             <div class="btn-group">
-              <button title="" class="btn btn-xs btn-white btn-default">  
+              <button title="" class="btn btn-xs btn-white btn-default"  (click)="openUpdateModal(item)">  
                 <i class="ace-icon fa fa-edit"></i>
               </button>
-              <button title="" class="btn btn-xs btn-white btn-default">
-                <i class="ace-icon fa fa-adjust"></i>
+              <button title="" class="btn btn-xs btn-white btn-default" (click)="onDelete(item)">
+                <i class="ace-icon fa fa-trash"></i>
               </button>
             </div>  
           </td>
@@ -73,16 +73,20 @@
     </p-table>
     <!-- PAGE CONTENT ENDS -->
   </div>
+  <div class="col-xs-12" style="text-align: right;">
+    <ngb-pagination [collectionSize]="totalRecords" [pageSize]="pageSize" [(page)]="page" [maxSize]="10" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+  </div>
   <!-- /.col -->
 </div>
 <!-- /.row -->
-<div  id="createUserModal" class="modal fade" role="dialog">
+<div *ngIf="showUpdateModal" id="createUserModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg full-height-modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Nhập thông tin người dùng</h4>
+          <h4  *ngIf="isCreate" class="modal-title">Nhập thông tin người dùng</h4>
+          <h4 *ngIf="!isCreate" class="modal-title">Sửa thông tin người dùng</h4>
         </div>
-        <form [formGroup]="formdata"  (ngSubmit)="onSubmit(formdata.value)" class="form-horizontal utehy-form">
+        <form *ngIf="doneSetupForm" [formGroup]="formdata"  (ngSubmit)="onSubmit(formdata.value)" class="form-horizontal utehy-form">
           <div class="modal-body no-padding">
             <div class="form-group">
               <label class="col-sm-2 control-label no-padding-right"> Họ tên(<span style="color: red;">*</span>)</label>
@@ -133,14 +137,22 @@
                         </ul>
                     </ng-template>
               </p-fileUpload>
+              <img *ngIf="user && user.image_url" style="height: 50px;width: 50px;" [src]="user.image_url">
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label no-padding-right"> Tài khoản(<span style="color: red;">*</span>)</label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                 <input type="text" formControlName="taikhoan" placeholder="Tài khoản" />
                 <div *ngIf="submitted && f.taikhoan.errors" class="invalid-feedback">
                   <div *ngIf="f.taikhoan.errors.required">Tài khoản là bắt buộc</div>
+                </div>
+              </div>
+              <label class="col-sm-2 control-label no-padding-right"> Loại quyền(<span style="color: red;">*</span>)</label>
+              <div class="col-sm-4">
+                <p-dropdown [options]="roles" formControlName="role" [style]="{'width':'100%'}"></p-dropdown>
+                <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                  <div *ngIf="f.role.errors.required">Loại quyền là bắt buộc</div>
                 </div>
               </div>
             </div>
