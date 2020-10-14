@@ -132,12 +132,10 @@
               <div class="col-sm-10">
                 <p-fileUpload #file_image mode="advanced" [showUploadButton]="false" cancelLabel="Hủy" chooseLabel ="Chọn ảnh"   multiple="false" accept="image/*" maxFileSize="1000000">
                     <ng-template pTemplate="content">
-                        <ul *ngIf="uploadedFiles.length">
-                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                        </ul>
+                        <img *ngIf="user && user.image_url" style="height: 100px;width: 100px;" [src]="user.image_url">
                     </ng-template>
               </p-fileUpload>
-              <img *ngIf="user && user.image_url" style="height: 50px;width: 50px;" [src]="user.image_url">
+             
               </div>
             </div>
             <div class="form-group">
